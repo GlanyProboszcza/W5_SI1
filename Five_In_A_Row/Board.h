@@ -7,7 +7,7 @@ class Board {
 
 public:
 	//int& operator[] (int index);
-
-private:
+	int getField(int x, int y);
+	void setField(int v, int x, int y);
 };
 

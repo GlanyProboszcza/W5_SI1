@@ -1,7 +1,19 @@
 #include "Game.h"
 
 void Game::printBoard() {
+	std::cout << " \t";
+	for(int i = 1; i < width; i++){
+		std::cout << i << "\t";
+	}
+	std::cout << "\n";
 
+	for (int i = 1; i < width; i++) {
+		std::cout << char(64 + i) << "\t";
+		for (int j = 1; j < width; j++) {
+			std::cout << gameBoard.getField(i,j) << "\t";
+		}
+		std::cout << "\n";
+	}
 }
 
 Game::Game() {
@@ -23,7 +35,7 @@ Game::Game() {
 
 	for (int i = 0; i < this->width; i++) {
 		for (int j = 0; j < this->heigth; j++) {
-			gameBoard.
+			gameBoard.setField(0,i,j);
 		}
 	}
 }
@@ -57,7 +69,7 @@ bool Game::runTime()
 	} while (isValid);
 	chooseY = stoi(input);
 
-	board[chooseX][chooseY] = round;
+	gameBoard.setField(round,chooseX, chooseY);
 
 	if (round == 1) {
 		round = 2;
