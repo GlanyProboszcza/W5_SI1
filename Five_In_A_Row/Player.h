@@ -9,6 +9,7 @@ class Player
 public:
 	Player();
 	void setIcon(char icon);
+	char getIcon();
 	std::string getName();
 };
 
