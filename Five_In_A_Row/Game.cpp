@@ -47,7 +47,7 @@ Game::Game() {
 bool Game::runTime()
 {
 	this->printBoard();
-	std::cout << "Player " << ((round == 1)? player1.getName() : player2.getName()) << "'s move.\n";
+	std::cout << "Player " << ((round%2 == 1)? player1.getName() : player2.getName()) << "'s move.\n";
 	int chooseX, chooseY;
 	bool isValid=1;
 	std::string input;
@@ -84,13 +84,9 @@ bool Game::runTime()
 			std::cout << "Field taken, try again.\n";
 		}
 	} while (gameBoard[chooseX][chooseY] != 0);
-	gameBoard[chooseX][chooseY] = round;
+	gameBoard[chooseX][chooseY] = round%2;
 
-	if (round == 1) {
-		round = 2;
-	}
-	else
-		round = 1;
+	round++;
 
 	std::cout << "\x1B[2J\x1B[H";
 	switch (isWin()) {
@@ -114,6 +110,9 @@ bool Game::runTime()
 
 int Game::isWin()
 {
+	if (heigth * width < round)
+		return 3;
+
 	int len = 0;
 	int element = 0;
 
