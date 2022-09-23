@@ -46,6 +46,7 @@ Game::Game() {
 
 bool Game::runTime()
 {
+	std::cout << "\x1B[2J\x1B[H"; // clear screen
 	this->printBoard();
 	std::cout << "Player " << ((round%2 == 1)? player1.getName() : player2.getName()) << "'s move.\n";
 	int chooseX, chooseY;
@@ -84,23 +85,27 @@ bool Game::runTime()
 			std::cout << "Field taken, try again.\n";
 		}
 	} while (gameBoard[chooseX][chooseY] != 0);
-	gameBoard[chooseX][chooseY] = round%2;
+	gameBoard[chooseX][chooseY] = round%2 ? 1 : 2;
 
 	round++;
-
-	std::cout << "\x1B[2J\x1B[H";
 	switch (isWin()) {
 	case 0:
 		break;
 	case 1:
+		std::cout << "\x1B[2J\x1B[H"; // clear screen
+		this->printBoard();
 		std::cout << player1.getName() << " win!\n";
 		return 1;
 		break;
 	case 2:
+		std::cout << "\x1B[2J\x1B[H"; // clear screen
+		this->printBoard();
 		std::cout << player2.getName() << " win!\n";
 		return 2;
 		break;
 	case 3:
+		std::cout << "\x1B[2J\x1B[H"; // clear screen
+		this->printBoard();
 		std::cout << "It's a tie!\n";
 		return 3;
 		break;

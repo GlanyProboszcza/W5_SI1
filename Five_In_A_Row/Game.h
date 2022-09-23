@@ -18,6 +18,4 @@ public:
 	Game();
 	bool runTime();
 	int isWin();
-
 };
-
