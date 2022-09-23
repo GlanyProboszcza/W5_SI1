@@ -17,7 +17,7 @@ public:
 	void printBoard();
 	Game();
 	bool runTime();
-
+	int isWin();
 
 };
 

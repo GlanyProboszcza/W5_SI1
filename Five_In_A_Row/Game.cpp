@@ -93,5 +93,156 @@ bool Game::runTime()
 		round = 1;
 
 	std::cout << "\x1B[2J\x1B[H";
+	switch (isWin()) {
+	case 0:
+		break;
+	case 1:
+		std::cout << player1.getName() << " win!\n";
+		return 1;
+		break;
+	case 2:
+		std::cout << player2.getName() << " win!\n";
+		return 2;
+		break;
+	case 3:
+		std::cout << "It's a tie!\n";
+		return 3;
+		break;
+	}
+	return 0;
+}
+
+int Game::isWin()
+{
+	int len = 0;
+	int element = 0;
+
+	for (int i = 0; i < width; i++) {
+		for (int j = 0; j < heigth; j++) {
+			switch (gameBoard[i][j]) {
+			case 0:
+				len = 1;
+				break;
+			case 1:
+				if (element == 1) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+
+			case 2:
+				if (element == 2) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+			}
+			element = gameBoard[i][j];
+			if (len == 5) {
+				return element;
+			}
+		}
+		element = 0;
+		len = 1;
+	}
+
+	for (int j = 0; j < heigth; j++) {
+		for (int i = 0; i < width; i++) {
+			switch (gameBoard[i][j]) {
+			case 0:
+				len = 1;
+				break;
+			case 1:
+				if (element == 1) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+
+			case 2:
+				if (element == 2) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+			}
+			element = gameBoard[i][j];
+			if (len == 5) {
+				return element;
+			}
+		}
+		element = 0;
+		len = 1;
+	}
+
+	for (int i = 0; i < width + heigth; i++) {
+		for (int j = 0; j < heigth; j++) {
+			if (i - j < 0 || i - j >= width)
+				continue;
+			switch (gameBoard[i - j][j]) {
+			case 0:
+				len = 1;
+				break;
+			case 1:
+				if (element == 1) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+
+			case 2:
+				if (element == 2) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+			}
+			element = gameBoard[i - j][j];
+			if (len == 5) {
+				return element;
+			}
+		}
+	element = 0;
+	len = 1;
+	}
+
+	for (int i = width-1; i > -heigth; i--) {
+		for (int j = 0; j < heigth; j++) {
+			if (i + j < 0 || i + j >= width)
+				continue;
+			switch (gameBoard[i+j][j]) {
+			case 0:
+				len = 1;
+				break;
+			case 1:
+				if (element == 1) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+
+			case 2:
+				if (element == 2) {
+					len++;
+				}
+				else
+					len = 1;
+				break;
+			}
+			element = gameBoard[i + j][j];
+			if (len == 5) {
+				return element;
+			}
+		}
+		element = 0;
+		len = 1;
+	}
 	return 0;
 }
